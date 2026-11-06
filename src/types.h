@@ -36,7 +36,7 @@ inline const char* stream_kind_str(StreamKind k) {
         case StreamKind::Trade:     return "trade";
     }
     return "unknown";
-}
+}  //cpp inline function enum to string for csv 
 
 struct PriceLevel {
     int64_t price = 0;
