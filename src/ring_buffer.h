@@ -20,12 +20,12 @@ public:
         if (next == tail_.load(std::memory_order_acquire))
             return nullptr;
         return &slots_[h];
-    }
+    }// returns a pointer to the next slot for pushing data, or nullptr if the buffer is full
 
     void commit_push() {
         size_t h = head_.load(std::memory_order_relaxed);
         head_.store((h + 1) & MASK, std::memory_order_release);
-    }
+    }// commits the push by advancing the head index, making the new data visible to the consumer
 
     T* try_pop() {
         size_t t = tail_.load(std::memory_order_relaxed);
